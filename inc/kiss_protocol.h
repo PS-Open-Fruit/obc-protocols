@@ -27,5 +27,8 @@ typedef enum {
 } kiss_status_t;
 
 uint8_t KISS_IsFrameComplete(const uint8_t *buf, uint16_t len);
+kiss_status_t KISS_Init();
+uint16_t KISS_Encode(const uint8_t *in_buf, uint16_t len, uint8_t *out_buffer);
+uint16_t KISS_Decode(const uint8_t *in_buf, uint16_t in_len, uint8_t *out_buff);
 
 #endif
