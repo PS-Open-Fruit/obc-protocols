@@ -17,7 +17,7 @@
 #define EPS_GET_ALL             0x06U
 #define EPS_SET_SWITCH          0x05U
 
-#define EPS_WAIT_TIMTOUT 1000U
+#define EPS_WAIT_TIMTOUT 300U
 #define EPS_NUM_VI_CHANNEL  8U
 #define EPS_NUM_OUTPUT_CHANNEL  6U
 #define EPS_NUM_TEMP_BATT  2U
@@ -32,6 +32,8 @@ typedef struct eps_cmd{
 
 typedef enum {
     EPS_DATA_ERROR,
+    EPS_DATA_NO_DATA,
+    EPS_DATA_CONSUMED,
     EPS_DATA_OK,
 } eps_data_state;
 
