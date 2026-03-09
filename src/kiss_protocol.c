@@ -1,6 +1,27 @@
 #include "kiss_protocol.h"
 #include "hal_stm32.h"
 
+uint16_t KISS_Encode_Custom_Cmd(const uint8_t *in_buf, uint8_t cmd, uint16_t len, uint8_t *out_buffer){
+    uint16_t idx = 0;
+    out_buffer[idx++] = FEND;
+    out_buffer[idx++] = TNC_DATA;
+
+    for (uint16_t i = 0; i < len; i++) {
+    uint8_t c = in_buf[i];
+    if (c == FEND) {
+        out_buffer[idx++] = FESC;
+        out_buffer[idx++] = TFEND;
+    } else if (c == FESC) {
+        out_buffer[idx++] = FESC;
+        out_buffer[idx++] = TFESC;
+    } else {
+        out_buffer[idx++] = c;
+    }
+    }
+    out_buffer[idx++] = FEND;
+    return idx;
+}
+
 uint16_t KISS_Encode(const uint8_t *in_buf, uint16_t len, uint8_t *out_buffer){
     uint16_t idx = 0;
     out_buffer[idx++] = FEND;
